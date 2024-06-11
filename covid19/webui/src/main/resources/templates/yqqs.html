@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>全国疫情大数据分析平台</title>
+  <script src="../static/js/echarts.js"></script>
+  <script src="../static/js/china.js"></script>
+  <script src="../static/js/jquery.js"></script>
+  <link href="../static/css/bootstrap.css" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    #main {
+      width: 600px;
+      height: 450px;
+      margin: 150px auto;
+      border: 1px solid #ddd;
+    }
+
+    /*默认长宽比0.75*/
+    .center {
+      margin: auto;
+      width: 70%;
+    }
+  </style>
+
+
+</head>
+<body>
+<div>
+  <h2 align="center">疫情趋势(近100天)</h2>
+</div>
+<div id="time_line" style="width: 1500px;height:600px;" class="center"></div>
+</body>
+
+<script type="text/javascript">
+  /*--------------------时间趋势折线图-----------------------------*/
+  var myLineChart = echarts.init(document.getElementById("time_line"));
+  myLineChart.setOption({
+    title: {
+      text: '疫情趋势'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: ['新增确诊', '累计确诊', '疑似病例', '累计治愈', '累计死亡']
+    },
+    dataset: {
+      // 这里指定了维度名的顺序，从而可以利用默认的维度到坐标轴的映射。
+      dimensions: ['dateId', '新增确诊', '累计确诊', '疑似病例', '累计治愈', '累计死亡'],
+      source: []
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: []
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {type: 'line'},
+      {type: 'line'},
+      {type: 'line'},
+      {type: 'line'},
+      {type: 'line'}
+    ]
+  });
+
+
+  var xdata2 = [];//x轴
+  $.getJSON('http://localhost:8080/covid/getCovidTimeData1', function (data) {
+    var arr = data.data
+    for (var i = 0; i < arr.length; i++) {
+      xdata2.push(arr[i].dateId)
+    }
+    myLineChart.setOption({
+      dataset: {
+        source: data.data
+      },
+      xAxis: {
+        data: xdata2
+      }
+    })
+  })
+
+</script>
+</html>

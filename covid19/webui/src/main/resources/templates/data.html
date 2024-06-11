@@ -1,0 +1,983 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>全国疫情大数据分析平台</title>
+<!--设置是否为缩放模式 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="/static/js/bootstrap.min.js"></script>
+<!--echarts JS-->
+<script src="/static/js/echarts.min.js"></script>
+<!-- 轮播swiper文件 -->
+<link rel="stylesheet" type="text/css" href="/static/css/swiper.min.css">
+<script src="/static/js/swiper.min.js"></script>
+<!--界面样式-->
+<script src="/static/js/visual.js"></script>
+<script src="/static/js/china.js"></script>
+<script src="/static/js/chartMap.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/visual.css">
+
+
+
+
+</head>
+<body class="ksh">
+	<div id="load">
+		<div class="load_img"><!-- 加载动画 -->
+			<img class="jzxz1" src="../static/images/jzxz1.png">
+			<img class="jzxz2" src="../static/images/jzxz2.png">
+		</div>
+	</div>
+	<div class="head_top">
+		<span id="lastUpdateTime">全国疫情数据实时跟踪</span>
+	</div>
+	<div class="visual">
+		<div class="visual_left">
+			<div class="visual_box">
+
+				<div class="visual_title">
+					<span>国内资讯</span>
+					<img src="../static/images/ksh33.png">
+
+				</div>
+				<img id="i0" width="30" height="30"><a id="u0"><font id="t0" size="4"></font></a><br>
+				<img id="i1" width="30" height="30"><a id="u1"><font id="t1" size="4"></font></a><br>
+				<img id="i2" width="30" height="30"><a id="u2"><font id="t2" size="4"></font></a><br>
+				<img id="i3" width="30" height="30"><a id="u3"><font id="t3" size="4"></font></a><br>
+				<img id="i4" width="30" height="30"><a id="u4"><font id="t4" size="4"></font></a><br>
+				<img id="i5" width="30" height="30"><a id="u5"><font id="t5" size="4"></font></a><br>
+				<img id="i6" width="30" height="30"><a id="u6"><font id="t6" size="4"></font></a><br>
+<!--
+				<div class="wikiItemWrap___3oAqW "><div class="right___3CvOs"><div class="title___3OCy7">新冠病毒疫苗是一种什么药？</div><div class="content___2Qqcs">接种后可刺激人体产生针对新型冠状病毒（2019-nCoV）的抗体，从而为受种者提供免疫保护，抵御新型冠状病毒感染人体或导致发病。</div><div class="footer___2gy8D"><span>查看详情</span></div></div></div>
+-->
+
+				<!--<div class="visual_chart" id="main1">
+
+				</div>-->
+			</div>
+			<div class="visual_box">
+				<div class="visual_title">
+					<span>境外输入</span>
+					<img src="../static/images/ksh33.png">
+				</div>
+				<div id="import_pie" style="width: 480px;height:300px;" class="visual_chart">
+
+				</div>
+			</div>
+			<div class="visual_box">
+				<div class="visual_title">
+					<span><a href="/yqqs">疫情趋势</a></span>
+					<img src="../static/images/ksh33.png">
+				</div>
+
+				<div id="time_line" style="width: 480px;height:300px;" class="center"></div>
+			</div>
+		</div>
+		<div class="visual_con">
+			<div class="visual_conTop">
+				<div class="visual_conTop_box visual_conTop1">
+					<div>
+						<h3>现存确诊</h3>
+						<p id="currentConfirmedCount">0</p>
+						<div class="conTop_smil">
+							<!--<a class="xd">周环比:<span>-2%</span><i class="fa fa-long-arrow-down"></i></a>-->
+						</div>
+					</div>
+				</div>
+				<div class="visual_conTop_box visual_conTop1">
+					<div>
+						<h3>累计确诊</h3>
+						<p id="confirmedCount">0</p>
+						<div class="conTop_smil">
+							<!--<a class="">现有疑似</a>
+							<a class="">平均<span>120</span></i></a>-->
+						</div>
+					</div>
+				</div>
+				<div class="visual_conTop_box visual_conTop1">
+					<div>
+						<h3>现存疑似</h3>
+						<p id="suspectedCount">0</p>
+						<div class="conTop_smil">
+							<!--<a class="">现有疑似</a>
+							<a class="">平均<span>120</span></i></a>-->
+						</div>
+					</div>
+				</div>
+				<div class="visual_conTop_box visual_conTop1">
+					<div>
+						<h3>累计治愈</h3>
+						<p id="curedCount">0</p>
+						<div class="conTop_smil">
+							<!--<a class="sz">日环比:<span>+3%</span><i class="fa fa-long-arrow-up"></i></a>-->
+							<!--a class="xd">周环比:<span>-2%</span><i class="fa fa-long-arrow-down"></i></a-->
+						</div>
+					</div>
+				</div>
+				<div class="visual_conTop_box visual_conTop1">
+					<div>
+						<h3>累计死亡</h3>
+						<p id="deadCount">0</p>
+<!--						<div class="conTop_smil">-->
+<!--							<a class="null">null</a>-->
+<!--							<a class="xd">月环比:<span>-2%</span><i class="fa fa-long-arrow-down"></i></a>-->
+<!--						</div>-->
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="visual_conBot">
+				<img class="visual_conBot_l" src="../static/images/ksh42.png">
+				<img class="visual_conBot_2" src="../static/images/ksh43.png">
+				<img class="visual_conBot_3" src="../static/images/ksh44.png">
+				<img class="visual_conBot_4" src="../static/images/ksh45.png">
+				<div class="visual_chart_text">
+					<h1>全国疫情地图</h1>
+					<!--h2>山西省交通大数据分析平台</h2-->
+				</div>
+				<!--<div class="visual_chart" id="main8"></div>
+				<div class="visual_conBot_bot">-->
+				<div id="map_all" style="width: 925px;height:870px;" class="left"></div>
+			</div>
+		</div>
+
+		<div class="visual_right">
+			<div class="visual_box">
+				<div class="visual_title">
+					<span>今日新增</span>
+					<img src="../static/images/ksh33.png">
+				</div>
+				<div class="swiper-container visual_swiper1 visual_chart">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"  id="main2"></div>
+						<div class="swiper-slide"  id="main3"></div>
+					</div>
+				</div>
+			</div>
+			<div class="visual_box visualSfzsfl">
+				<div class="visual_title">
+					<span>北京新增TOP5</span>
+					<img src="../static/images/ksh33.png">
+				</div>
+				<div id="city_line" style="width: 480px;height:300px;" class="center"></div>
+
+			</div>
+			<div class="visual_box">
+				<div class="visual_title">
+					<span><a href="/wz">救援物资捐赠统计</a></span>
+					<img src="../static/images/ksh33.png">
+				</div>
+				<div class="swiper-container visual_swiper2 visual_chart">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"  id="main4"></div>
+						<div class="swiper-slide"  id="main41"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<script type="text/javascript">
+
+		$(function(){
+			var a=$('.visualSssf_left a')
+			for(var i=0;i<a.length;i++){
+				a[i].index=i;
+				a[i].onclick=function(){
+					for(var i=0;i<a.length;i++){
+						a[i].className=''
+					}
+					this.className='active'
+				}
+			}
+			var sfzcllH=$('.sfzcll_box').height()
+			var sfzcllHtwo=sfzcllH-2
+			$('.sfzcll_box').css('line-height',sfzcllH+'px')
+			$('.sfzcll_smallBk>div').css('line-height',sfzcllHtwo+'px')
+
+			//删除加载动画
+			$('#load').fadeOut(1000)
+    		setTimeout(function(){
+    			$('#load').remove()
+    		}
+    		,1100);
+		})
+
+
+		var mySwiper1 = new Swiper('.visual_swiper1', {
+			autoplay: true,//可选选项，自动滑动
+			speed:800,//可选选项，滑动速度
+			autoplay: {
+				delay: 5000,//5秒切换一次
+			},
+		})
+
+		$.getJSON("http://localhost:8080/news/getDiagnoseList?count=24", function (data) {
+			var map=data.data
+			$('#u0').attr('href',map.docs[0].h5url)
+			$("#t0").html(map.docs[0].title)
+			$("#i0").attr("src",map.docs[0].image)
+			$('#u1').attr('href',map.docs[20].h5url)
+			$("#t1").html(map.docs[20].title)
+			$("#i1").attr("src",map.docs[0].image)
+			$('#u2').attr('href',map.docs[17].h5url)
+			$("#t2").html(map.docs[17].title)
+			$("#i2").attr("src",map.docs[0].image)
+			$('#u3').attr('href',map.docs[14].h5url)
+			$("#t3").html(map.docs[14].title)
+			$("#i3").attr("src",map.docs[0].image)
+			$('#u4').attr('href',map.docs[11].h5url)
+			$("#t4").html(map.docs[11].title)
+			$("#i4").attr("src",map.docs[0].image)
+			$('#u5').attr('href',map.docs[1].h5url)
+			$("#t5").html(map.docs[1].title)
+			$("#i5").attr("src",map.docs[0].image)
+			$('#u6').attr('href',map.docs[4].h5url)
+			$("#t6").html(map.docs[4].title)
+			$("#i6").attr("src",map.docs[0].image)
+		})
+		/*--------------------全国统计数据-----------------------------*/
+		$.getJSON("http://localhost:8080/covid/getNationalData", function (data) {
+			var map = data.data
+			$("#datetime").html(map.datetime)
+			$("#currentConfirmedCount").html(map.currentConfirmedCount)
+			$("#confirmedCount").html(map.confirmedCount)
+			$("#suspectedCount").html(map.suspectedCount)
+			$("#curedCount").html(map.curedCount)
+			$("#deadCount").html(map.deadCount)
+		})
+		/*--------------------全国地图-----------------------------*/
+			var dataList=[
+				{name: '北京', value: 100},
+				{name: '上海', value: randomValue()}
+			]
+			var myMapChart = echarts.init(document.getElementById('map_all'));
+			function randomValue() {
+				return Math.round(Math.random()*1000);
+			}
+			myMapChart.setOption({
+				tooltip: {
+					formatter:function(params,ticket, callback){
+						return params.seriesName+'<br />'+params.name+'：'+params.value
+					}
+				},
+				visualMap: {
+					min: 0,
+					max: 4000,
+					left: 'left',
+					top: 'bottom',
+					text: ['多','少'],
+					inRange: {
+						color: ['#ffe5bf', '#ffa372', '#ff7e86','#ee1216','#B22222']
+					},textStyle:{
+						color:'white'
+					},
+					show:true
+				},
+				geo: {
+					map: 'china',
+					roam: true,//不开启缩放和平移
+					zoom:1.23,//视角缩放比例
+					label: {
+						normal: {
+							show: true,
+							fontSize:'10',
+							color: 'rgba(0,0,0,0.7)'
+						}
+					},
+					itemStyle: {
+						normal:{
+							borderColor: 'rgba(0, 0, 0, 0.2)'
+						},
+						emphasis:{
+							areaColor: '#AEEEEE',//鼠标悬停区域颜色
+							shadowOffsetX: 0,
+							shadowOffsetY: 0,
+							shadowBlur: 20,
+							borderWidth: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				},
+				series : [
+					{
+						name: '累计确诊',
+						type: 'map',
+						geoIndex: 0,
+						data:dataList
+
+					}
+				]
+			});
+
+			myMapChart.on('click', function (params) {
+				alert(params.name+"累计确诊:"+params.value);
+			});
+
+			setTimeout(function () {
+				// 异步加载json格式数据
+				$.getJSON('http://localhost:8080/covid/getNationalMapData', function(data) {
+					myMapChart.setOption({
+						series: [{
+							data: data.data
+						}]
+					});
+				});
+			}, 1000)
+
+		/*--------------------境外输入饼图-----------------------------*/
+		var myPieChart = echarts.init(document.getElementById("import_pie"));
+		myPieChart.setOption({
+			tooltip: {
+				trigger: 'item',
+				formatter: '{a} <br/>{b} : {c} ({d}%)'
+			},
+			legend: {
+				type: 'scroll',
+				orient: 'vertical',
+				right: 10,
+				top: 20,
+				bottom: 20,
+				textStyle:{
+					color:'white'
+				}
+			},
+			series : [
+				{
+					name: '境外输入',
+					type: 'pie',    // 设置图表类型为饼图
+					radius: '70%',  // 饼图的半径
+					emphasis: {
+						itemStyle: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					},
+				}
+			]
+		})
+		$.getJSON('http://localhost:8080/covid/getCovidImportData', function (data) {
+			myPieChart.setOption({
+				series:[{
+					data: data.data
+				}]
+			})
+		})
+
+		/*--------------------时间趋势折线图-----------------------------*/
+		var myLineChart = echarts.init(document.getElementById("time_line"));
+		myLineChart.setOption({
+			tooltip: {
+				trigger: 'axis'
+			},
+			legend: {
+				data: ['新增确诊', '累计确诊', '疑似病例', '累计治愈', '累计死亡'],
+				textStyle:{
+					color:'white'
+				}
+			},
+			dataset: {
+				// 这里指定了维度名的顺序，从而可以利用默认的维度到坐标轴的映射。
+				dimensions: ['dateId', '新增确诊', '累计确诊', '疑似病例', '累计治愈', '累计死亡'],
+				source: []
+			},
+			grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true
+			},
+			toolbox: {
+				feature: {
+					saveAsImage: {}
+				}
+			},
+			xAxis: {
+				type: 'category',
+				boundaryGap: false,
+				data: [],
+				axisLabel: {
+					textStyle: { // 字体配置
+						color: 'white',
+					}
+				}
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					textStyle: { // 字体配置
+						color: 'white',
+					}
+				}
+			},
+			series: [
+				{type: 'line'},
+				{type: 'line'},
+				{type: 'line'},
+				{type: 'line'},
+				{type: 'line'}
+			]
+		});
+
+
+		var xdata2 = [];//x轴
+		$.getJSON('http://localhost:8080/covid/getCovidTimeData', function (data) {
+			var arr = data.data
+			for (var i = 0; i < arr.length; i++) {
+				xdata2.push(arr[i].dateId)
+			}
+			myLineChart.setOption({
+				dataset: {
+					source: data.data
+				},
+				xAxis: {
+					data: xdata2
+				}
+			})
+		})
+		/*--------------------今日京津冀-----------------------------*/
+		var myChart2 = echarts.init(document.getElementById('main2'));
+		myChart2.setOption({
+			tooltip: {
+				trigger: 'item'
+			},
+			legend: {
+				type: 'scroll',
+				orient: 'vertical',
+				right: 10,
+				top: 20,
+				bottom: 20,
+				textStyle:{
+					color:'white'
+				}
+			},
+			itemStyle:{
+				normal: {
+					areaStyle: {
+						type: 'default', //不设置时，为透明
+						opacity: 0.4,
+					}
+				}
+			},
+			radar: [
+				{
+					indicator: [
+						{ text: '疑似病例' },
+						{ text: '累计死亡' },
+						{ text: '累计确诊' },
+						{ text: '累计治愈' },
+						{ text: '新增确诊' }
+					],
+					center: ['50%', '50%'],
+					radius: 120,
+					startAngle: 90,
+					splitNumber: 4,
+					shape: 'circle',
+					axisName: {
+						formatter: '【{value}】',
+						color: 'white'
+					},
+					axisLine: {
+						lineStyle: {
+							color: 'white'
+						}
+					},
+
+					splitArea: {                        // 坐标轴在 grid 区域中的分隔区域，默认不显示。
+						show: true,
+						areaStyle: {                            // 分隔区域的样式设置。
+							color: 'rgba(255,0,0,0)',       // 分隔区域颜色。分隔区域会按数组中颜色的顺序依次循环设置颜色。默认是一个深浅的间隔色。
+						}
+					},
+					splitLine: {
+						lineStyle: {
+							color: 'white'
+						}
+					},
+					rich:{
+
+					}
+				},
+			],
+
+			series: [
+				{
+					type: 'radar',
+					emphasis: {
+						lineStyle: {
+							width: 4
+						}
+					},
+					data: [
+						{
+
+						},
+					]
+				},
+
+			]
+		});
+		$.getJSON('http://localhost:8080/covid/getCityData1', function (data) {
+
+			myChart2.setOption({
+				series: [{
+					data : [
+						{
+							name:'北京',
+							value : [data.data[0].疑似病例,data.data[0].累计死亡,data.data[0].累计确诊
+								,data.data[0].累计治愈,data.data[0].新增确诊],
+							// 设置区域边框和区域的颜色
+							itemStyle: {
+								normal: {
+									color: 'rgba(255,225,52,.3)',
+									lineStyle: {
+										color: 'rgba(255,225,52,.3)',
+									},
+								},
+							},
+							areaStyle:{
+
+							}
+						},
+						{
+							value: [data.data[1].疑似病例,data.data[1].累计死亡,data.data[1].累计确诊
+								,data.data[1].累计治愈,data.data[1].新增确诊],
+							name: '天津',
+							areaStyle: {
+								color: 'rgba(255, 228, 52, 0.6)'
+							}
+						},
+						{
+							value: [data.data[2].疑似病例,data.data[2].累计死亡,data.data[2].累计确诊
+								,data.data[2].累计治愈,data.data[2].新增确诊],
+							name: '河北',
+							areaStyle: {
+								color: 'rgba(255, 228, 52, 0.6)'
+							}
+						}
+					]
+				}]
+
+			})
+		})
+
+		/*--------------------今日江浙沪-----------------------------*/
+		var myChart3 = echarts.init(document.getElementById('main3'));
+		myChart3.setOption({
+			tooltip: {
+				trigger: 'item'
+			},
+			legend: {
+				type: 'scroll',
+				orient: 'vertical',
+				right: 10,
+				top: 20,
+				bottom: 20,
+				textStyle:{
+					color:'white'
+				}
+			},
+			itemStyle:{
+				normal: {
+					areaStyle: {
+						type: 'default', //不设置时，为透明
+						opacity: 0.4,
+					}
+				}
+			},
+			radar: [
+				{
+					indicator: [
+						{ text: '疑似病例' },
+						{ text: '累计死亡' },
+						{ text: '累计确诊' },
+						{ text: '累计治愈' },
+						{ text: '新增确诊' }
+					],
+					center: ['50%', '50%'],
+					radius: 120,
+					startAngle: 90,
+					splitNumber: 4,
+					shape: 'circle',
+					axisName: {
+						formatter: '【{value}】',
+						color: 'white'
+					},
+					axisLine: {
+						lineStyle: {
+							color: 'white'
+						}
+					},
+
+					splitArea: {                        // 坐标轴在 grid 区域中的分隔区域，默认不显示。
+						show: true,
+						areaStyle: {                            // 分隔区域的样式设置。
+							color: 'rgba(255,0,0,0)',       // 分隔区域颜色。分隔区域会按数组中颜色的顺序依次循环设置颜色。默认是一个深浅的间隔色。
+						}
+					},
+					splitLine: {
+						lineStyle: {
+							color: 'white'
+						}
+					},
+					rich:{
+
+					}
+				},
+			],
+
+			series: [
+				{
+					type: 'radar',
+					emphasis: {
+						lineStyle: {
+							width: 4
+						}
+					},
+					data: [
+						{
+
+						},
+					]
+				},
+
+			]
+		});
+		$.getJSON('http://localhost:8080/covid/getCityData2', function (data) {
+
+			myChart3.setOption({
+				series: [{
+					data : [
+						{
+							name:'上海',
+							value : [data.data[0].疑似病例,data.data[0].累计死亡,data.data[0].累计确诊
+								,data.data[0].累计治愈,data.data[0].新增确诊],
+							// 设置区域边框和区域的颜色
+							itemStyle: {
+								normal: {
+									color: 'rgba(255,225,52,.3)',
+									lineStyle: {
+										color: 'rgba(255,225,52,.3)',
+									},
+								},
+							},
+							areaStyle:{
+
+							}
+						},
+						{
+							value: [data.data[1].疑似病例,data.data[1].累计死亡,data.data[1].累计确诊
+								,data.data[1].累计治愈,data.data[1].新增确诊],
+							name: '江苏',
+							areaStyle: {
+								color: 'rgba(255, 228, 52, 0.6)'
+							}
+						},
+						{
+							value: [data.data[2].疑似病例,data.data[2].累计死亡,data.data[2].累计确诊
+								,data.data[2].累计治愈,data.data[2].新增确诊],
+							name: '浙江',
+							areaStyle: {
+								color: 'rgba(255, 228, 52, 0.6)'
+							}
+						}
+					]
+				}]
+
+			})
+		})
+
+		/*--------------------北京疫情趋势折线图-----------------------------*/
+		var myLineChart2 = echarts.init(document.getElementById("city_line"));
+		myLineChart2.setOption({
+			tooltip: {
+				trigger: 'axis'
+			},
+			legend: {
+				data: ['新增确诊', '累计确诊', '疑似病例', '累计治愈', '累计死亡'],
+				textStyle:{
+					color:'white'
+				}
+			},
+			dataset: {
+				// 这里指定了维度名的顺序，从而可以利用默认的维度到坐标轴的映射。
+				dimensions: ['区名', '新增确诊', '累计确诊', '疑似病例', '累计治愈', '累计死亡'],
+				source: []
+			},
+			grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true
+			},
+			toolbox: {
+				feature: {
+					saveAsImage: {}
+				}
+			},
+			xAxis: {
+				type: 'category',
+				boundaryGap: false,
+				data: [],
+				axisLabel: {
+					textStyle: { // 字体配置
+						color: 'white',
+					}
+				}
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					textStyle: { // 字体配置
+						color: 'white',
+					}
+				}
+			},
+			series: [
+				{type: 'line'},
+				{type: 'line'},
+				{type: 'line'},
+				{type: 'line'},
+				{type: 'line'}
+			]
+		});
+
+
+		var xdata3 = [];//x轴
+		$.getJSON('http://localhost:8080/covid/getCovidBeJingData', function (data) {
+			var arr = data.data
+			for (var i = 0; i < arr.length; i++) {
+				xdata3.push(arr[i].区名)
+			}
+			myLineChart2.setOption({
+				dataset: {
+					source: data.data
+				},
+				xAxis: {
+					data: xdata3
+				}
+			})
+		})
+
+
+		var myChart4 = echarts.init(document.getElementById('main4'));
+		myChart4.setOption({
+			"grid": {
+				"left": 110,
+				"top": 0,
+				"bottom": 10
+			},
+			"tooltip": {
+				"trigger": "item",
+				"textStyle": {
+					"fontSize": 12
+				},
+				"formatter": "{b0}:{c0}"
+			},
+			"xAxis": {
+				"max":5000,
+				"splitLine": {
+					"show": false
+				},
+				"axisLine": {
+					"show": false
+				},
+				"axisLabel": {
+					"show": false
+				},
+				"axisTick": {
+					"show": false
+				}
+			},
+			"yAxis": [
+				{
+					"type": "category",
+					"inverse": false,
+					"data": ['84消毒液(瓶)','N95口罩(个)','一次性手套(副)','外科口罩(个)','医用防护服(套)'],
+					"axisLine": {
+						"show": false
+					},
+					"axisTick": {
+						"show": false
+					},
+					"axisLabel": {
+						"margin": -4,
+						"textStyle": {
+							"color": "#fff",
+							"fontSize": 16.25
+						}
+					}
+				},
+
+			],
+
+		});
+		setInterval(function () {
+			$.getJSON('http://localhost:8080/covid/getCovidWz', function (data) {
+
+				myChart4.setOption({
+					"series": [
+						{
+							"type": "pictorialBar",
+							"symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+							"symbolRepeat": "fixed",
+							"symbolMargin": "5%",
+							"symbolClip": true,
+							"symbolSize": 22.5,
+							"symbolPosition": "start",
+							"symbolOffset": [
+								20,
+								0
+							],
+							"symbolBoundingData": 5000,
+							"data": [data.data[0].捐赠,data.data[1].捐赠,data.data[2].捐赠,data.data[3].捐赠,data.data[4].捐赠],
+							"z": 10
+						},
+						{
+							"type": "pictorialBar",
+							"itemStyle": {
+								"normal": {
+									"opacity": 0.3
+								}
+							},
+							"label": {
+								"normal": {
+									"show": false
+								}
+							},
+							"animationDuration": 0,
+							"symbolRepeat": "fixed",
+							"symbolMargin": "5%",
+							"symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+							"symbolSize": 22.5,
+							"symbolBoundingData": 5000,
+							"symbolPosition": "start",
+							"symbolOffset": [
+								20,
+								0
+							],
+							"data": [data.data[0].捐赠,data.data[1].捐赠,data.data[2].捐赠,data.data[3].捐赠,data.data[4].捐赠],
+							"z": 5
+						}
+					]
+				})
+			})
+		}, 2000)
+		var myChart41 = echarts.init(document.getElementById('main41'));
+		myChart41.setOption({
+			"grid": {
+				"left": 110,
+				"top": 0,
+				"bottom": 10
+			},
+			"tooltip": {
+				"trigger": "item",
+				"textStyle": {
+					"fontSize": 12
+				},
+				"formatter": "{b0}:{c0}"
+			},
+			"xAxis": {
+				"max":5000,
+				"splitLine": {
+					"show": false
+				},
+				"axisLine": {
+					"show": false
+				},
+				"axisLabel": {
+					"show": false
+				},
+				"axisTick": {
+					"show": false
+				}
+			},
+			"yAxis": [
+				{
+					"type": "category",
+					"inverse": false,
+					"data": ['医疗废物袋/个','防疫护目镜(副)','杀菌洗手液/瓶','电子体温计(个)','红外测温仪/个'],
+					"axisLine": {
+						"show": false
+					},
+					"axisTick": {
+						"show": false
+					},
+					"axisLabel": {
+						"margin": -4,
+						"textStyle": {
+							"color": "#fff",
+							"fontSize": 16.25
+						}
+					}
+				},
+
+			],
+		});
+		setInterval(function () {
+			$.getJSON('http://localhost:8080/covid/getCovidWz', function (data) {
+
+				myChart41.setOption({
+					"series": [
+						{
+							"type": "pictorialBar",
+							"symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+							"symbolRepeat": "fixed",
+							"symbolMargin": "5%",
+							"symbolClip": true,
+							"symbolSize": 22.5,
+							"symbolPosition": "start",
+							"symbolOffset": [
+								20,
+								0
+							],
+							"symbolBoundingData": 5000,
+							"data": [data.data[5].捐赠,data.data[6].捐赠,data.data[7].捐赠,data.data[8].捐赠,data.data[9].捐赠],
+							"z": 10
+						},
+						{
+							"type": "pictorialBar",
+							"itemStyle": {
+								"normal": {
+									"opacity": 0.3
+								}
+							},
+							"label": {
+								"normal": {
+									"show": false
+								}
+							},
+							"animationDuration": 0,
+							"symbolRepeat": "fixed",
+							"symbolMargin": "5%",
+							"symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+							"symbolSize": 22.5,
+							"symbolBoundingData": 5000,
+							"symbolPosition": "start",
+							"symbolOffset": [
+								20,
+								0
+							],
+							"data": [data.data[5].捐赠,data.data[6].捐赠,data.data[7].捐赠,data.data[8].捐赠,data.data[9].捐赠],
+							"z": 5
+						}
+					]
+				})
+			})
+		}, 2000)
+
+
+		var mySwiper2 = new Swiper('.visual_swiper2', {
+			autoplay: true,//可选选项，自动滑动
+			direction : 'vertical',//可选选项，滑动方向
+			speed:2000,//可选选项，滑动速度
+		})
+	</script>
+</body>
+</html>

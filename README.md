@@ -33,3 +33,7 @@
 	"cities": []
 }
 ```
+
+## 项目架构
+
+<img src="/doc/image.png" width="50%" height="50%">

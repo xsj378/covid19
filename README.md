@@ -1,5 +1,6 @@
 # COVID19
 ![](https://img.shields.io/badge/HttpClient-blue) ![](https://img.shields.io/badge/JSoup-green) ![](https://img.shields.io/badge/Kafka-blue) ![](https://img.shields.io/badge/SparkStreaming-red) ![](https://img.shields.io/badge/StructuredStreaming-lightgreen) ![](https://img.shields.io/badge/MySQL-yellow) ![](https://img.shields.io/badge/SpringBoot-blue)
+
 项目对疫情数据实时爬取、物资数据模拟生成，将数据发送到Kafka消息队列，使用Spark程序从Kafka集群中实时的消费数据并统计分析，同时存入MySQL数据库中，最后使用Echarts从不同维度可视化呈现疫情数据分布。
 ## 功能需求
 + 对全国疫情数据进行实时汇总。

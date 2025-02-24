@@ -209,4 +209,4 @@ resultDS.foreachRDD(rdd => {
 ```
 ## 大屏展示
 
-<img src="/doc/show.png" width="50%" height="50%">
+<img src="/doc/show.png" width="75%" height="75%">
